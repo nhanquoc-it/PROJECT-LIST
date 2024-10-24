@@ -1,0 +1,163 @@
+/*======================= FONT GOOGLE =======================*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/*======================= RESET CSS =======================*/
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	font-family: "Poppins", sans-serif;
+}
+/*======================= CARD CSS =======================*/
+#main {
+	padding: 100px;
+	height: 100vh;
+}
+.card-list {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: -30px; /* Sử dụng giá trị âm cho margin-left : để nó chia đều cho mỗi item */
+}
+.card-item {
+	border-radius: 20px;
+	overflow: hidden;
+	background-color: #fff;
+	box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0px;
+
+	width: calc(
+		25% - 30px
+	); /* Lấy 25% của mỗi item chia cho giá trị margin-left */
+	margin-left: 30px;
+}
+
+.card-image {
+	width: 100%;
+	height: 200px;
+	object-fit: cover; /* Giúp ảnh không bị vỡ */
+}
+.card-top {
+	padding: 25px;
+}
+.card-title {
+	font-weight: 500;
+	margin-bottom: 25px;
+}
+.card-user {
+	display: flex;
+	align-items: center;
+}
+.card-avatar {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+	flex-shrink: 0; /* Không cho ảnh co lại */
+}
+.card-info {
+	padding-left: 20px;
+	flex: 1; /* Chiếm hết khoảng trống còn lại */
+}
+.card-user-top {
+	display: flex;
+	align-items: center;
+}
+.card-user-name {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 1;
+}
+.card-user-check {
+	color: #20e3b1;
+	margin-left: 5px;
+}
+.card-user-game {
+	color: #999;
+	font-weight: 300;
+	font-size: 14px;
+}
+.card-bottom {
+	padding: 25px;
+	border-top: 1px solid #aaa;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.card-live {
+	color: #fff;
+	display: flex;
+	align-items: center;
+	padding: 5px 15px;
+	border-radius: 10px;
+	background-color: #ff6651;
+}
+.card-live span {
+	margin-left: 10px;
+}
+.card-watching {
+	font-size: 13px;
+	color: #999;
+	font-weight: 300;
+}
+/*======================= PROBLEM SOLVING =======================*/
+/* Vấn đề 1: Giải quyết các "card-item" bằng nhau */
+.card-item {
+	display: flex;
+	flex-direction: column;
+}
+.card-image {
+	flex-shrink: 0;
+}
+.card-content {
+	flex: 1;
+}
+/* Vấn đề 2: Giải quyết các "card-top" và "card-bottom" luôn nằm dưới cùng và luôn đều nhau */
+.card-top,
+.card-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+.card-user,
+.card-bottom {
+	margin-top: auto;
+	flex-shrink: 0; /* Để nó cố định ở chiều cao đó */
+}
+/* Vấn đề 3: Giải quyết các "card-title" có chứa nội dung liền nhau */
+.card-title {
+	word-break: break-all; /* Ngắt cho nội dung tự động rớt xuống hàng */
+}
+/* Vấn đề 4: Giải quyết các "card-title" có chứa nội dung quá dài (giới hạn số dòng) */
+.card-title {
+	display: -webkit-box;
+	-webkit-line-clamp: 3; /* số dòng */
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-word;
+}
+/* Vấn đề 5: Tối ưu các item khi dàn layout vói Flexbox (Responsive) */
+.card-list {
+	--spacing: 20px; /* Khởi tạo biến khoảng trống (margin-left) */
+	--columns: 4; /* Khởi tạo biến hiển thị số cột */
+
+	margin-left: calc(-1 * var(--spacing)); /* Trừ cho giá trị margin âm */
+}
+.card-item {
+	width: calc(calc(100% / var(--columns)) - var(--spacing));
+	margin-left: var(--spacing);
+	margin-bottom: var(--spacing);
+}
+/* Tablet */
+@media screen and (max-width: 1023px) {
+	.card-list {
+		--spacing: 15px;
+		--columns: 2;
+	}
+}
+/* Mobile */
+@media screen and (max-width: 767px) {
+	.card-list {
+		--columns: 1;
+	}
+}
